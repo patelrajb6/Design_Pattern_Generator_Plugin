@@ -2,6 +2,10 @@ plugins {
     id 'java'
     id 'org.jetbrains.intellij' version '0.4.16'
 }
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 group 'org.example'
 version '1.0-SNAPSHOT'
@@ -11,12 +15,18 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    //testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.2")
+    implementation group: 'org.slf4j', name:'slf4j-api', version: '1.7.25'
+    implementation group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    implementation group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+    implementation group: 'com.typesafe', name: 'config', version: '1.0.2'
+    implementation group:'org.mockito',name:'mockito-core',version: '2.21.0'
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '201.6487.11'
+    version '201.5985.32-EAP-SNAPSHOT'
 }
 patchPluginXml {
     changeNotes """

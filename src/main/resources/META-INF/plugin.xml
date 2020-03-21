@@ -1,11 +1,10 @@
 <idea-plugin>
-    <id>org.example.homework3</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <id>org.example.DePaCoG_PlugIn</id>
+    <name>DesignPattern Generator</name>
+    <vendor email="rpate375@uic.edu" url="github.com/patelrajb6">student</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Generates the DesignPattern of User's Choice.<br>
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -14,6 +13,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <toolWindow id="Design Pattern Generator" anchor="right" secondary="false" factoryClass="PlugInViews.DesignWindow" />
     </extensions>
 
     <actions>
