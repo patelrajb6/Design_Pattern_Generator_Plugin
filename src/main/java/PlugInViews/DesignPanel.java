@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.psi.PsiFile;
@@ -84,21 +85,18 @@ public class DesignPanel extends JFrame {
     public String CreateAndGetPath(Project project) {
 
         VirtualFile[] moduleSourceRoot = ProjectRootManager.getInstance(project).getContentSourceRoots();
-        for(VirtualFile vcd: moduleSourceRoot)
+        List<VirtualFile> allfiles= VfsUtil.collectChildrenRecursively(moduleSourceRoot[0]);
+        for(VirtualFile v : allfiles)
         {
-            System.out.println(vcd.getPath());
-            for (VirtualFile c: vcd.getChildren()){
-                System.out.println(c.getPath());
-                for(VirtualFile vc: c.getChildren())
-                {
-                   PsiFile p=PsiManager.getInstance(project).findFile(vc);
-                    System.out.println(vc.getName());
-                }
-                System.out.println("-------children of children--------------");
+            PsiFile p=PsiManager.getInstance(project).findFile(v);
+            if(p!=null)
+            {
+                System.out.println("file parent: "+p.getParent().getName());
+                System.out.println("psi file data:--- "+p);
             }
-            System.out.println("---------------------");
-
+            System.out.println("file name: "+v.getName());
         }
+
         String path= project.getBasePath()+'/';
        // String path= moduleSourceRoot.getPath()+'/';
         VirtualFile[] files= ProjectRootManager.getInstance(project).getContentRoots();
