@@ -1,8 +1,17 @@
 package PlugInViews;
 
 import DesignPatterns.DesignPattern;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectFileIndex;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +19,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 public class DesignPanel extends JFrame {
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -41,76 +51,27 @@ public class DesignPanel extends JFrame {
     public void initHashmap(String path){  // creates a hashmap from the button to runnable
         ButtonStrings= new HashMap<JButton, Runnable>();
         ButtonStrings.put(abstractFactoryButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("AbstractFactory");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::abstractFactoryButton failed",ex);
-//            }
-
             new AbstractView(path);
         });
         ButtonStrings.put(builderButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Builder");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::BuilderButton failed",ex);
-//            }
             new BuilderView(path);
         });
         ButtonStrings.put(chainOfResponsibilityButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Chain");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::chainButton failed",ex);
-//            }
             new ChainView(path);
         });
         ButtonStrings.put(facadeButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Facade");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::facadeButton failed",ex);
-//            }
             new FacadeView(path);
         });
         ButtonStrings.put(factoryButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Factory");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::facadeButton failed",ex);
-//            }
             new FactoryView(path);
         });
         ButtonStrings.put(mediatorButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Mediator");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::mediatorButton failed",ex);
-//            }
             new MediatorView(path);
         });
         ButtonStrings.put(templateButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Template");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::templateButton failed",ex);
-//            }
              new TemplateView(path);
         });
         ButtonStrings.put(visitorButton,()->{
-//            try {
-//                new DesignPattern(path,null).getDesignPattern("Visitor");
-//                new ConfirmationDialog();
-//            } catch (IOException ex) {
-//                logger.error(getClass().toString()+"::visitorButton failed",ex);
-//            }
             new VisitorView(path);
         });
         logger.info(getClass().toString()+"::initHashmap success");
@@ -121,12 +82,37 @@ public class DesignPanel extends JFrame {
 
     }
     public String CreateAndGetPath(Project project) {
+
+        VirtualFile[] moduleSourceRoot = ProjectRootManager.getInstance(project).getContentSourceRoots();
+        for(VirtualFile vcd: moduleSourceRoot)
+        {
+            System.out.println(vcd.getPath());
+            for (VirtualFile c: vcd.getChildren()){
+                System.out.println(c.getPath());
+                for(VirtualFile vc: c.getChildren())
+                {
+                   PsiFile p=PsiManager.getInstance(project).findFile(vc);
+                    System.out.println(vc.getName());
+                }
+                System.out.println("-------children of children--------------");
+            }
+            System.out.println("---------------------");
+
+        }
         String path= project.getBasePath()+'/';
-        System.out.println(path);
+       // String path= moduleSourceRoot.getPath()+'/';
+        VirtualFile[] files= ProjectRootManager.getInstance(project).getContentRoots();
+
+       // VirtualFile[] mp= moduleSourceRoot.getChildren();
+
+
+//
         File GeneratedCode= new File(path+"/GeneratedCode"); //creates a directory in project "GeneratedCode
         GeneratedCode.mkdir();
         path= GeneratedCode.getPath()+'/';
         logger.info(getClass().toString()+"::CreateAndPath success");
+
+
         return path;    //stores all the generated files there
     }
     public JPanel getContent(){
