@@ -31,7 +31,7 @@ public class MediatorView extends JFrame {
                 Config con = MediatorConfig.UserInput(AbstractClassText.getText(), ConcreteClassesText.getText(),AbstractUserText.getText(),MediatorObjectText.getText(),ConcreteUserText.getText());
                 new DesignPattern(path,con).getDesignPattern("Mediator");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

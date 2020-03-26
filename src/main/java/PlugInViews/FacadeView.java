@@ -24,7 +24,7 @@ public class FacadeView extends JFrame {
                 Config con = FacadeConfig.UserInput(textField1.getText(), textField2.getText(),textField3.getText());
                 new DesignPattern(path,con).getDesignPattern("Facade");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

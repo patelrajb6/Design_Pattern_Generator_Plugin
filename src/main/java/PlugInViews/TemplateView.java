@@ -30,7 +30,6 @@ public class TemplateView extends JFrame {
                 Config con = TemplateConfig.UserInput(AbstractClassText.getText(), TemplateMethod.getText(),AbstractMethodsText.getText(),ConcreteClassesText.getText());
                 new DesignPattern(path,con).getDesignPattern("Template");
                 setVisible(false);
-                new ConfirmationDialog();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

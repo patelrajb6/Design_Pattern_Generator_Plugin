@@ -27,7 +27,7 @@ public abstract class DesignFactory {
             if (file.createNewFile()) {
                 logger.info("File is created!");
             } else {
-                duplicateFiles.add(fileName);
+                duplicateFiles.add(fileName+".java");
                 logger.debug("File already exists.");
             }
             FileWriter writer = new FileWriter(file);
@@ -62,18 +62,16 @@ public abstract class DesignFactory {
     public void CheckRepeatedFiles(){
         File dir= new File(dirPath);
         System.out.println(dir.isDirectory());
-        for (File f: dir.listFiles()){
-            System.out.println(f.getName());
-        }
         if(duplicateFiles.size()==0){
             new ConfirmationDialog();
         }
         else{
             new NameClassErrorDialog(duplicateFiles);
-
+            for (File f: dir.listFiles()){
+                System.out.println(f.getName());
+                System.out.println(f.delete());
+            }
         }
-
-
     }
 
 }

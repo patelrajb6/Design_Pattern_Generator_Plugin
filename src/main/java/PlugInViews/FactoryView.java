@@ -28,7 +28,7 @@ public class FactoryView extends JFrame {
                 Config con = FactoryConfig.UserInput(textField1.getText(), textField2.getText(),textField3.getText());
                 new DesignPattern(path,con).getDesignPattern("Factory");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

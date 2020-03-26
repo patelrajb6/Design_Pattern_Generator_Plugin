@@ -25,7 +25,7 @@ public class ChainView extends JFrame {
                 Config con = ChainConfig.UserInput(textField2.getText(), textField1.getText());
                 new DesignPattern(path,con).getDesignPattern("Chain");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
