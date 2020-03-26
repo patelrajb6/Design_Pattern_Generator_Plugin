@@ -6,6 +6,7 @@ import com.typesafe.config.Config;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AbstractView extends JFrame {
     private JTextField AbstractInterface;
@@ -18,6 +19,7 @@ public class AbstractView extends JFrame {
     private JLabel ConcreteFactories;
     private AbstractConfig UserGenerated;
     public AbstractView(String path){
+        ArrayList<String> inputs= new ArrayList<String>();
         setLocationRelativeTo(null);
         //UserGenerated=new AbstractConfig();
         okButton.addActionListener(e->{
@@ -29,7 +31,7 @@ public class AbstractView extends JFrame {
             try {
                 new DesignPattern(path,config).getDesignPattern("AbstractFactory");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

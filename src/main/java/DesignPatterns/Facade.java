@@ -30,6 +30,7 @@ public class Facade extends DesignFactory {
             createAbstractClass(AbstractFacade,path);        //generates the abstract class
             createClass(AbstractFacade,path);        //generates the classes of the concrete implementation
             ProductClasses(path);       //generating decoupled products
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch (Exception e)
         {

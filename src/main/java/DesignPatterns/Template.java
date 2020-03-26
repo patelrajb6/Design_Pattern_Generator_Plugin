@@ -70,6 +70,7 @@ public class Template extends DesignFactory {
         try{
             createAbstractClass(path);  //creates the abstract class
             createClass(AbstractClass,path); //creates the concrete class
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch (Exception e) {
             logger.error(getClass()+"::GenerateCode() failed",e);

@@ -18,5 +18,4 @@ public class AbstractConfig{
         config += "}";
         return ConfigFactory.parseString(config);
     }
-
 }

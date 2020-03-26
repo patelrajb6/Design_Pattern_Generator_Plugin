@@ -9,7 +9,7 @@ public class ConfirmationDialog extends JFrame  {
     private JPanel panel1;
     private JButton okButton;
     private JLabel confirm;
-    ConfirmationDialog(){
+    public ConfirmationDialog(){
         setLocationRelativeTo(null);
         setContentPane(panel1);
         setVisible(true);

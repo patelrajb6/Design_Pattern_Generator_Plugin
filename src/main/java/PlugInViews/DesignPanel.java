@@ -1,6 +1,7 @@
 package PlugInViews;
 
 import DesignPatterns.DesignPattern;
+import NameClashDetection.clashDetector;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -84,32 +85,13 @@ public class DesignPanel extends JFrame {
     }
     public String CreateAndGetPath(Project project) {
 
-        VirtualFile[] moduleSourceRoot = ProjectRootManager.getInstance(project).getContentSourceRoots();
-        List<VirtualFile> allfiles= VfsUtil.collectChildrenRecursively(moduleSourceRoot[0]);
-        for(VirtualFile v : allfiles)
-        {
-            PsiFile p=PsiManager.getInstance(project).findFile(v);
-            if(p!=null)
-            {
-                System.out.println("file parent: "+p.getParent().getName());
-                System.out.println("psi file data:--- "+p);
-            }
-            System.out.println("file name: "+v.getName());
-        }
-
-        String path= project.getBasePath()+'/';
-       // String path= moduleSourceRoot.getPath()+'/';
-        VirtualFile[] files= ProjectRootManager.getInstance(project).getContentRoots();
-
-       // VirtualFile[] mp= moduleSourceRoot.getChildren();
-
-
-//
+        clashDetector detector= new clashDetector(project);
+        detector.getPsifiles();
+        String path=ProjectRootManager.getInstance(project).getContentSourceRoots()[0].getParent().getPath()+'/';
         File GeneratedCode= new File(path+"/GeneratedCode"); //creates a directory in project "GeneratedCode
         GeneratedCode.mkdir();
         path= GeneratedCode.getPath()+'/';
         logger.info(getClass().toString()+"::CreateAndPath success");
-
 
         return path;    //stores all the generated files there
     }

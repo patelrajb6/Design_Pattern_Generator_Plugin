@@ -57,6 +57,7 @@ public class Factory extends DesignFactory {
             createClass(FactoryName,path);   //creates the factory class
             createInterface(path);  //creates the Product Interface
             createProducts(path);   //creates the concrete product
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch(Exception e)
         {

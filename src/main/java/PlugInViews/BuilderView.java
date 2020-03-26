@@ -29,7 +29,7 @@ public class BuilderView extends JFrame {
                 Config con =BuilderConfig.UserInput(tf1.getText(), tf2.getText(), tf3.getText(), tf4.getText());
                 new DesignPattern(path,con).getDesignPattern("Builder");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

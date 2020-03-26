@@ -1,5 +1,7 @@
 package DesignPatterns;
 
+import NameClashDetection.NameClassErrorDialog;
+import PlugInViews.ConfirmationDialog;
 import com.typesafe.config.Config;
 
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class AbstractFactory extends DesignFactory {
             createClass(factoryName,path);   //generates the Concrete Implementation of the DesignPatterns.Factory
             createProductInterface(path);   //generates the product Interface
             createProductClass(path);       //generates the Concrete Implementation of Product
+            CheckRepeatedFiles();
         } catch (Exception e){
             logger.error(getClass()+"::GenerateCode() failed",e);
         }

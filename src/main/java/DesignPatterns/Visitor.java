@@ -92,6 +92,7 @@ public class Visitor extends DesignFactory{
             createAbstractVisitorClass(path);
             createElementClass(path);
             createClass(AbstractVisitor,path);
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch (Exception e){
             logger.error(getClass()+"::GenerateCode() failed",e);

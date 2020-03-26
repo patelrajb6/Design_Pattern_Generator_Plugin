@@ -108,6 +108,7 @@ public class Mediator extends DesignFactory {
             createMediatorClass(path);  //generates the concrete implementation of mediator
             createAbstractUser(path); //generates the abstract user class
             createClass(AbstractUser,path);  //generates concrete implementation of the User
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch (Exception e){
             logger.error("Mediator::GenerateCode() failed",e);

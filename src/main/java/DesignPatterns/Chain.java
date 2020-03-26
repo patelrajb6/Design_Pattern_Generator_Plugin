@@ -41,6 +41,7 @@ public class Chain extends DesignFactory {
         try{
             createAbstractClass(this.Handler,path);      //generating the abstract class needed for handling the request
             createClass(this.Handler,path);              //generates the classes which will handle the request
+            CheckRepeatedFiles();
             logger.info(getClass().toString()+"::GenerateCode success");
         }catch(Exception e)
         {

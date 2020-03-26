@@ -1,25 +1,31 @@
 package DesignPatterns;
 
+import NameClashDetection.NameClassErrorDialog;
+import PlugInViews.ConfirmationDialog;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class DesignFactory {
     Logger logger=LoggerFactory.getLogger(getClass());
     Config conf;
+    List<String>duplicateFiles= new ArrayList<>();
     abstract  void createClass(String name,String path)throws IOException;
     abstract public void GenerateCode(String path)throws IOException;
-    void generateFile (String syntax, String fileName,String path) {
+    void generateFile (String syntax, String fileName, String path) {
         try {
             if(fileName.length()==0)      //if the user doesnt type anything
-                return;
+                return ;
             File file = new File(path+fileName + ".java");
             if (file.createNewFile()) {
                 logger.info("File is created!");
             } else {
+                duplicateFiles.add(fileName);
                 logger.debug("File already exists.");
             }
             FileWriter writer = new FileWriter(file);
@@ -30,6 +36,7 @@ public abstract class DesignFactory {
             e.printStackTrace();
             logger.error("File generation failed");
         }
+
     }
 
     public Config getConfig(String filename)        //gets the config file's absolute path and returns the Config object
@@ -48,6 +55,16 @@ public abstract class DesignFactory {
             logger.error(String.format("Error in %s: getConfig", getClass()),ex);
         }
         return conf;
+    }
+
+    public void CheckRepeatedFiles(){
+
+        if(duplicateFiles.size()==0){
+            new ConfirmationDialog();
+        }
+        else
+
+            new NameClassErrorDialog(duplicateFiles);
     }
 
 }

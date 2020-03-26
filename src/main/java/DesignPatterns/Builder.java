@@ -36,7 +36,8 @@ public class Builder extends DesignFactory {
             createInterface(InterfaceName,path);                     //generates the Interface of the DesignPatterns.Builder
             createClass(InterfaceName,path);                         //generates the Concrete Classes implementing the DesignPatterns.Builder Interface
             createProduct(Object,path);                              //generates the class which makes the basic object
-            logger.info(getClass().toString()+"::GenerateCode success");
+            CheckRepeatedFiles();
+        logger.info(getClass().toString()+"::GenerateCode success");
         }catch (Exception e){
             logger.error(getClass()+"::GenerateCode() failed",e);
         }
