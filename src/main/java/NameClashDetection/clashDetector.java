@@ -31,16 +31,14 @@ public class clashDetector {
             }
         }
     }
-    private List<VirtualFile> getVirtualFiles(){        //getting all the virtual files in the module
+    private List<VirtualFile> getVirtualFiles(){        //getting all the virtual files in the source roots of the modules..
         List<VirtualFile> allfiles = new ArrayList<>();
         try{
             VirtualFile[] moduleSourceRoot = ProjectRootManager.getInstance(this.project).getContentSourceRoots();
-
             for(VirtualFile vf: moduleSourceRoot)
             {
                 allfiles.addAll(VfsUtil.collectChildrenRecursively(vf));
             }
-
         }catch (Exception e){
             logger.error(getClass().toString()+":: getVirtualFile Error", e);
         }

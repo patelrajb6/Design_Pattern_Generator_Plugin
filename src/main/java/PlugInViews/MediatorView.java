@@ -40,7 +40,7 @@ public class MediatorView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Mediator");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

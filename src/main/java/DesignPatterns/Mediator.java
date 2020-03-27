@@ -36,7 +36,7 @@ public class Mediator extends DesignFactory {
     }
     private void createAbstractMediator(String path) {
         try{
-            String syntax=String.format("public abstract %s {\n", AbstractMediator);    //syntax for the abstract class
+            String syntax=String.format("public abstract class  %s {\n", AbstractMediator);    //syntax for the abstract class
             syntax+=String.format("\tpublic abstract %s;\n", AbstractMethod);   //adding the abstract function
             syntax+="}";
             generateFile(syntax,AbstractMediator,path);  //generates the file
@@ -51,7 +51,7 @@ public class Mediator extends DesignFactory {
             for(String className: ConcreteMediators)
             {
                 //generates the syntax
-                String syntax=String.format("public %s extends %s {\n",className,AbstractMediator);
+                String syntax=String.format("public  class %s extends %s {\n",className,AbstractMediator);
                 for(Map.Entry<String,ConfigValue> instances: ConcreteUsers) //generates the instances of the Users
                 {
                     syntax+=String.format("\tprivate %s %s;\n", instances.getKey(),instances.getValue().unwrapped());
@@ -59,7 +59,7 @@ public class Mediator extends DesignFactory {
                 syntax+=String.format("\tpublic %s() {\n", className);
                 for(Map.Entry<String,ConfigValue> instances: ConcreteUsers)
                 {
-                    syntax+=String.format("\t\tthis.%s= new %s();\n", instances.getKey(),instances.getValue().unwrapped());
+                    syntax+=String.format("\t\tthis.%s= new %s();\n",instances.getValue().unwrapped() ,instances.getKey());
                 }
                 syntax+="\t}\n";
                 syntax+=String.format("\tpublic %s {\n\t}\n}",AbstractMethod);
@@ -74,7 +74,7 @@ public class Mediator extends DesignFactory {
     }
     private void createAbstractUser(String path) { //creating the Abstract User syntax
         try{    //generates the needed syntax
-            String syntax=String.format("public abstract %s {\n", AbstractUser);
+            String syntax=String.format("public abstract class %s {\n", AbstractUser);
             syntax+=String.format("\t%s %s;\n",AbstractMediator,MediatorObject);
             syntax+=String.format("\tpublic %s (%s %s){\n",AbstractUser,AbstractMediator,MediatorObject);
             syntax+=String.format("\t\tthis.%s =%s;\n\t}\n}", MediatorObject,MediatorObject);
@@ -89,7 +89,7 @@ public class Mediator extends DesignFactory {
         try{
             for(Map.Entry<String,ConfigValue> className:ConcreteUsers)     //concrete class Implementation
             {   //generates the syntax
-                String syntax=String.format("public %s extends %s {\n",className.getKey(),name);
+                String syntax=String.format("public class %s extends %s {\n",className.getKey(),name);
                 syntax+=String.format("\tpublic %s(%s %s) {\n", className.getKey(),AbstractMediator,MediatorObject);
                 syntax+=String.format("\t\tsuper(%s);\n\t}\n", MediatorObject);
                 syntax+="\tvoid DoSomethingwithMediatorObject() {\n\t}\n}";

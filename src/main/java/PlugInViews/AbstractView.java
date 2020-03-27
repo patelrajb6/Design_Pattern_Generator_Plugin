@@ -41,7 +41,6 @@ public class AbstractView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("AbstractFactory");
                 setVisible(false);
-                new ConfirmationDialog();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

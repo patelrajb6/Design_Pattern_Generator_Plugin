@@ -38,7 +38,7 @@ public class TemplateView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Template");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

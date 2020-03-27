@@ -75,7 +75,7 @@ public class AbstractFactory extends DesignFactory {
             for(String s: factoryMethods)
             {
                 String[] returnVal=s.split(" ");
-                class_syntax+="\t"+s+"{\n\t return new "+returnVal[0] +"();\n}\n";
+                class_syntax+="\t"+s+"{\n\t return new "+returnVal[1] +";\n}\n";
             }
             class_syntax+="}";
             try
@@ -136,7 +136,7 @@ public class AbstractFactory extends DesignFactory {
 
     private String addMethods (String methods)  {
         productsList.add(methods);
-        String method= String.format("%s create_%s()",methods,methods);
+        String method= String.format("public %s create_%s()",methods,methods);
         return method;
     }
 

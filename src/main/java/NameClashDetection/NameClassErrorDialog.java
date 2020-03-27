@@ -12,7 +12,7 @@ public class NameClassErrorDialog extends JFrame {
     public NameClassErrorDialog(List<String> errorNames){
         setLocationRelativeTo(null);
         setContentPane(rootpanel);
-       DefaultListModel listModel=new DefaultListModel();
+       DefaultListModel<String> listModel=new DefaultListModel();
         for(String file:errorNames){
             listModel.addElement(file);
         }

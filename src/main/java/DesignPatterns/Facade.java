@@ -53,13 +53,13 @@ public class Facade extends DesignFactory {
                 class_syntax+=String.format("\tthis.%s =new %s();\n\t",object.getValue().unwrapped(),object.getKey());
             }
             class_syntax+="}\n";
-            class_syntax+="\t"+this.Method+"{\n\t}\n}"; //implementing the only needed method
+            class_syntax+="\tpublic "+this.Method+"{\n\t}\n}"; //implementing the only needed method
             generateFile(class_syntax, concreteClass,path);      //generating the file
             logger.info(getClass().toString()+"::createClass success");
         }
     }
     void createAbstractClass(String name,String path) throws IOException {
-        String class_syntax=String.format("public abstract %s {\n\t",name);         // generating syntax for abstract class
+        String class_syntax=String.format("public abstract class %s {\n\t",name);         // generating syntax for abstract class
         class_syntax+= String.format("public abstract %s;\n}",this.Method );
         generateFile(class_syntax, name,path); //generating the file
         logger.info(getClass().toString()+"::createAbstractClass success");

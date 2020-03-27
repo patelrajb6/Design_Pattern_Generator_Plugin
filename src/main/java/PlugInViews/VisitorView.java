@@ -30,7 +30,7 @@ public class VisitorView extends JFrame{
                 Config con = VisitorConfig.UserInput(AbstractElement.getText(), ConcreteElements.getText(),AbstractVisistorView.getText(),ConcreteVisitorView.getText());
                 new DesignPattern(path,con).getDesignPattern("Visitor");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -39,7 +39,7 @@ public class VisitorView extends JFrame{
             try {
                 new DesignPattern(path,null).getDesignPattern("Visitor");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

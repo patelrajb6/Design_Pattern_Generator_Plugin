@@ -25,6 +25,7 @@ import java.util.List;
 
 public class DesignPanel extends JFrame {
     Logger logger = LoggerFactory.getLogger(getClass());
+    public static Project currentProject;
     private JButton abstractFactoryButton;
     private JButton builderButton;
     private JButton chainOfResponsibilityButton;
@@ -40,6 +41,7 @@ public class DesignPanel extends JFrame {
 
     public DesignPanel(ToolWindow window, Project project){         // constructor which gets the path and also adds the listeners
         try{
+            currentProject=project;
             String path=CreateAndGetPath(project);  //gets the path
             initHashmap(path);
             createHandler(path);
@@ -85,12 +87,11 @@ public class DesignPanel extends JFrame {
     }
     public String CreateAndGetPath(Project project) {
 
-        clashDetector detector= new clashDetector(project);
-        detector.getPsifiles();
+//        clashDetector detector= new clashDetector(project);
+//        detector.getPsifiles();
+
         String path=ProjectRootManager.getInstance(project).getContentSourceRoots()[0].getParent().getPath()+'/';
-        File GeneratedCode= new File(path+"/GeneratedCode"); //creates a directory in project "GeneratedCode
-        GeneratedCode.mkdir();
-        path= GeneratedCode.getPath()+'/';
+
         logger.info(getClass().toString()+"::CreateAndPath success");
 
         return path;    //stores all the generated files there

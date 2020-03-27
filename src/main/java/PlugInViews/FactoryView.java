@@ -37,7 +37,7 @@ public class FactoryView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Factory");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

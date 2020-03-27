@@ -33,7 +33,7 @@ public class FacadeView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Facade");
                 setVisible(false);
-                new ConfirmationDialog();
+
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

@@ -17,7 +17,7 @@ public class Builder extends DesignFactory {
             else
                 this.conf= getConfig("BuilderConfig.conf");            //loading the Config
             this.BuilderClasses=conf.getStringList("DesignPattern.BuilderClasses");    //Getting the classes which are builders of implementing the Interface
-            this.Methods= conf.getStringList("DesignPattern.Methods");                 //Getting the Methods which are to be there in the Interface
+            this.Methods= conf.getStringList("DesignPattern.Parts");                 //Getting the Methods which are to be there in the Interface
             this.InterfaceName=conf.getString("DesignPattern.Name");                   //Getting the Interface name
             this.Object=conf.getString("DesignPattern.Product");                       //Getting the Initial Product
             logger.info(getClass().toString()+"::Builder success");
@@ -62,7 +62,7 @@ public class Builder extends DesignFactory {
             String interface_syntax=String.format("public interface %s {\n\t", name);       //String of syntax
             for(String methds: Methods)                                                     //getting the  methods specified in the Config and adding them to syntax
             {
-                interface_syntax+=methds+";"+"\n\t";
+                interface_syntax+="public void build_"+methds+"();"+"\n\t";
                 interface_syntax+="";
             }
             interface_syntax+="}";
@@ -85,7 +85,7 @@ public class Builder extends DesignFactory {
                 class_syntax+="\t"+this.Object+" "+Instance+";\n";
                 for(String methds: Methods)
                 {
-                    class_syntax+="\t"+methds+" {\n\t}\n";
+                    class_syntax+="\t"+"public void build_"+methds+"() {\n\t}\n";
                 }
                 class_syntax+="\t"+this.Object+" build(){\n\t return this."+Instance+";\n\t}\n";                  //every concrete builder class needs a build() which builds the product
                 class_syntax+="}";

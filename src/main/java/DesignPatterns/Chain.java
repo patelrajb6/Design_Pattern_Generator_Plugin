@@ -72,7 +72,7 @@ public class Chain extends DesignFactory {
             class_syntax+=String.format("\tsuper(%s);\n\t}\n", instance);
             class_syntax+=String.format("\t@Override\n\t");
             class_syntax+=String.format("\tpublic void handleRequest() {\n\t\tif (canHandleRequest()) {\n\t} else { \n\t",instance);
-            class_syntax+=String.format("\t\tsuper.handleRequest();\n\t\t}\n\t}\n", instance);
+            class_syntax+=String.format("\t\tsuper.handleRequest();\n\t\t}\n\t}\n}", instance);
             generateFile(class_syntax, handler,path);
 
         }

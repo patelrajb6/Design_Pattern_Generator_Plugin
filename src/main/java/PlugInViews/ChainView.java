@@ -34,7 +34,6 @@ public class ChainView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Chain");
                 setVisible(false);
-                new ConfirmationDialog();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

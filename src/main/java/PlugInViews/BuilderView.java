@@ -38,7 +38,6 @@ public class BuilderView extends JFrame {
             try {
                 new DesignPattern(path,null).getDesignPattern("Builder");
                 setVisible(false);
-                new ConfirmationDialog();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

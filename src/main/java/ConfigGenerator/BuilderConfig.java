@@ -13,7 +13,6 @@ public class BuilderConfig  {
         config += String.format("Interface=%s\n", Interface);
         config += String.format("Parts=[%s]\n", parts);
         config += String.format("BuilderClasses=[%s]\n", builderClass);
-        config += "Methods=[void buildPartA(),void buildPartB()]\n";
         config += "}";
         return ConfigFactory.parseString(config);
     }

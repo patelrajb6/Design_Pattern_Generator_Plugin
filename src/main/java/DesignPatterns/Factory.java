@@ -26,7 +26,7 @@ public class Factory extends DesignFactory {
         for(String classes: ConcreteProducts)
         {       //generating the syntax
             String product_syntax=String.format("public class %s implements %s {\n",classes,ProductInterface );
-            product_syntax+="\tvoid doSomething(){\n\t\t //do something\n\t}\n}";
+            product_syntax+="\tpublic void doSomething(){\n\t\t //do something\n\t}\n}";
             generateFile(product_syntax, classes,path);//generating the file
             logger.info(getClass().toString()+"::createProducts success");
         }
