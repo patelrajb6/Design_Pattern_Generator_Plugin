@@ -72,8 +72,7 @@ public class DesignPanel extends JFrame {
 
     }
     public String CreateAndGetPath(Project project) {
-        String path=project.getBasePath()+"/src/main/";
-        new File(path).mkdirs();
+        String path=project.getBasePath()+"/";
         logger.info(getClass().toString()+"::CreateAndPath success");
         return path;    //stores all the generated files there
     }

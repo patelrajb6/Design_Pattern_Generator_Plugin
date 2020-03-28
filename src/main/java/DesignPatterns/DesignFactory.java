@@ -39,11 +39,14 @@ public abstract class DesignFactory {
     abstract  void createClass(String name,String path)throws IOException;
     abstract public void GenerateCode(String path)throws IOException;
     void generateFile (String syntax, String fileName, String path) {
+        /*
+        * function generates the files
+        */
         try {
-            dirPath=createDir(path);
+            dirPath=createDir(path);  // creates directory to store the generated files.
             absolutePath=dirPath+fileName + ".java";
-            File file = new File(absolutePath);
-            createFile(file,syntax);
+            File file = new File(absolutePath);     //creating new file object
+            createFile(file,syntax); // function which makes the file and writes to it.
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -51,21 +54,29 @@ public abstract class DesignFactory {
         }
 
     }
+    /* createDir
+    * created a directory generatedCode to store the generated files
+    */
     private String createDir(String path){
         File dir= new File(path+"/GeneratedCode");
         dir.mkdir();
         return dir.getPath()+"/";
     }
+    /* create file
+    * this function creates the file and then writes to it
+    * apart from creating file it also checks for potential clash files in the source roots
+    * if file found to be in any other  module source then add it to the clashfiles
+    * where they are stored as pair of file and psifile */
     private void createFile(File file,String syntax){
         try{
             if (file.createNewFile()) {
-                generatedFiles.add(absolutePath);
-                Pair<Boolean,PsiFile>result=detector.ClashChecker(file.getName());
-                if(result.first){
-                    clashFiles.add(new Pair<PsiFile, File>(result.second,file));
+                generatedFiles.add(absolutePath);       //add the generated files for sanity checking
+                Pair<Boolean,PsiFile>result=detector.ClashChecker(file.getName());  //sending the file to clashdetector for checking
+                if(result.first){   //if  found
+                    clashFiles.add(new Pair<PsiFile, File>(result.second,file));// add it to the clashfiles
                 }
 
-                writetoFile(file, syntax);
+                writetoFile(file, syntax);  //writing to the file.
                 logger.info("File is created!");
             } else {
                 duplicateFiles.add(file.getName());
@@ -103,27 +114,27 @@ public abstract class DesignFactory {
         return conf;
     }
 
+
+
+    /*CheckRepeatedFiles is ran at the end after files have been created for the given pattern
+    *  according to the  different conditions different dialog boxes are opened.
+    * */
     public void CheckRepeatedFiles(){
         File fileLocater;
-        if( clashFiles.size()!=0){
-
-            new PotentialClashDialog(clashFiles);
-          //  clashFiles.clear();
-        }
-        else if(duplicateFiles.size()==0){
-
-            new ConfirmationDialog();
-        }
-        else{
-
+        //if there are duplicate files then opens the dialog and lets user know for duplicate files
+        if(duplicateFiles.size()!=0){
             new NameClassErrorDialog(duplicateFiles);
             for (String file: generatedFiles){
                 fileLocater= new File(file);
-                System.out.println(fileLocater.getName());
-                System.out.println(fileLocater.delete());
-            }
-            generatedFiles.clear();
-            duplicateFiles.clear();
+                fileLocater.delete();
+                }
         }
+        //if the clash files has files then open the clash dialog and display the warnings
+        else if( clashFiles.size()!=0){
+            new PotentialClashDialog(clashFiles);
+        }
+        //all went well than confirmation
+        else
+            new ConfirmationDialog();
     }
 }

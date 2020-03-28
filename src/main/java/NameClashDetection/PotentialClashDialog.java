@@ -17,13 +17,12 @@ public class PotentialClashDialog extends JFrame{
 
     public PotentialClashDialog(List<Pair<PsiFile,File>>warningfiles){
 
-        setTitle("Potential warnings");
         setLocationRelativeTo(null);
         setContentPane(rootpanel);
-        DefaultListModel<String> listfileModel=new DefaultListModel();
-        DefaultListModel<String> listLocationModel=new DefaultListModel();
+        DefaultListModel<String> listfileModel=new DefaultListModel();  //making default storage for the list elements
+        DefaultListModel<String> listLocationModel=new DefaultListModel();  //stores location of particular clash file
 
-        for(Pair<PsiFile,File> file:warningfiles){
+        for(Pair<PsiFile,File> file:warningfiles){  //getting the file and the corresponding psiJavaFile
             listfileModel.addElement(file.second.getName());
             listLocationModel.addElement(file.first.getVirtualFile().getPath());
         }
@@ -32,9 +31,13 @@ public class PotentialClashDialog extends JFrame{
         list2.setModel(listLocationModel);
         setVisible(true);
         pack();
-        cancelButton.addActionListener(e->{
+        /*
+        *  clash files are already generated so we would need to clean it
+        * if the user doesnt want those files
+        * */
+        cancelButton.addActionListener(e->{     //when the cancel button is pressed then do not generate file.
             for(Pair<PsiFile,File> file:warningfiles){
-                System.out.println(file.second.delete());
+                file.second.delete();
             }
             setVisible(false);
         });
