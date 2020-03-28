@@ -25,6 +25,7 @@ public class TemplateView extends JFrame {
 
     public TemplateView(String path) throws HeadlessException {
         setLocationRelativeTo(null);
+        setTitle("Template");
         okButton.addActionListener(e->{
             try {
                 Config con = TemplateConfig.UserInput(AbstractClassText.getText(), TemplateMethod.getText(),AbstractMethodsText.getText(),ConcreteClassesText.getText());

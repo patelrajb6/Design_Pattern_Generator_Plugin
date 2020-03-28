@@ -86,14 +86,9 @@ public class DesignPanel extends JFrame {
 
     }
     public String CreateAndGetPath(Project project) {
-
-//        clashDetector detector= new clashDetector(project);
-//        detector.getPsifiles();
-
-        String path=ProjectRootManager.getInstance(project).getContentSourceRoots()[0].getParent().getPath()+'/';
-
+        String path=project.getBasePath()+"/src/main/";
+        new File(path).mkdirs();
         logger.info(getClass().toString()+"::CreateAndPath success");
-
         return path;    //stores all the generated files there
     }
     public JPanel getContent(){

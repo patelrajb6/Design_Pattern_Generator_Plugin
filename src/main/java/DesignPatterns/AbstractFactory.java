@@ -1,7 +1,5 @@
 package DesignPatterns;
 
-import NameClashDetection.NameClassErrorDialog;
-import PlugInViews.ConfirmationDialog;
 import com.typesafe.config.Config;
 
 import java.io.IOException;

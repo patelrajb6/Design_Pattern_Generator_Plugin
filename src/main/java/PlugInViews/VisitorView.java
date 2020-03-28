@@ -24,6 +24,7 @@ public class VisitorView extends JFrame{
     private JLabel title;
 
     public VisitorView(String path) throws HeadlessException {
+        setTitle("Visitor");
         setLocationRelativeTo(null);
         okButton.addActionListener(e->{
             try {

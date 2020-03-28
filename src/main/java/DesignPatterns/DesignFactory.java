@@ -1,14 +1,10 @@
 package DesignPatterns;
 
-import NameClashDetection.NameClassErrorDialog;
+import PlugInViews.NameClassErrorDialog;
 import NameClashDetection.clashDetector;
 import PlugInViews.ConfirmationDialog;
 import PlugInViews.DesignPanel;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
@@ -30,23 +26,10 @@ public abstract class DesignFactory {
     abstract public void GenerateCode(String path)throws IOException;
     void generateFile (String syntax, String fileName, String path) {
         try {
-            File GeneratedCode= new File(path+"/java"); //creates a directory in project "GeneratedCode
-            GeneratedCode.mkdir();
-            dirPath=GeneratedCode.getPath()+'/';;
-            if(fileName.length()==0)      //if the user doesnt type anything
-                return ;
+            dirPath=createDir(path);
             absolutePath=dirPath+fileName + ".java";
             File file = new File(absolutePath);
-            if (file.createNewFile()) {
-                generatedFiles.add(absolutePath);
-                logger.info("File is created!");
-            } else {
-                duplicateFiles.add(fileName+".java");
-                logger.debug("File already exists.");
-            }
-            FileWriter writer = new FileWriter(file);
-            writer.write(syntax);
-            writer.close();
+            createFile(file,syntax);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +37,35 @@ public abstract class DesignFactory {
         }
 
     }
+    private String createDir(String path){
+        File dir= new File(path+"/GeneratedCode");
+        dir.mkdir();
+        return dir.getPath()+"/";
+    }
+    private void createFile(File file,String syntax){
+        try{
+            if (file.createNewFile()) {
+                generatedFiles.add(absolutePath);
+                writetoFile(file, syntax);
+                logger.info("File is created!");
+            } else {
+                duplicateFiles.add(file.getName());
+                logger.debug("File already exists.");
+            }
+        }catch(Exception e){
+            logger.error("file creation failed",e);
+        }
 
+    }
+    private void writetoFile(File file, String syntax){
+        try{
+            FileWriter writer = new FileWriter(file);
+            writer.write(syntax);
+            writer.close();
+        }catch(Exception e){
+            logger.error("filewriter failed",e);
+        }
+    }
     public Config getConfig(String filename)        //gets the config file's absolute path and returns the Config object
     {
         try {
@@ -76,17 +87,15 @@ public abstract class DesignFactory {
     public void CheckRepeatedFiles(){
         clashDetector detector= new clashDetector(currentProject);
         detector.getPsifiles();
-        File fileLocater;
-        File dir= new File(dirPath);
-        System.out.println(dir.isDirectory());
-        if(duplicateFiles.size()==0){
 
+        if(duplicateFiles.size()==0){
             new ConfirmationDialog();
         }
         else{
+            File fileLocater;
             new NameClassErrorDialog(duplicateFiles);
             for (String file: generatedFiles){
-                fileLocater= new File(absolutePath);
+                fileLocater= new File(file);
                 System.out.println(fileLocater.getName());
                 System.out.println(fileLocater.delete());
             }

@@ -20,6 +20,7 @@ public class ChainView extends JFrame {
 
     public ChainView(String path) {
         setLocationRelativeTo(null);
+        setTitle("Chain of Responsibility");
         okButton.addActionListener(e->{
             try {
                 Config con = ChainConfig.UserInput(textField2.getText(), textField1.getText());

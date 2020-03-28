@@ -1,4 +1,4 @@
-package NameClashDetection;
+package PlugInViews;
 import javax.swing.*;
 import java.util.List;
 

@@ -23,6 +23,7 @@ public class BuilderView extends JFrame {
     private JPanel rootPanel;
 
     public BuilderView(String path) throws HeadlessException {
+        setTitle("Builder");
         setLocationRelativeTo(null);
         Ok.addActionListener(e->{
             try {

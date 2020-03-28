@@ -22,6 +22,7 @@ public class FactoryView extends JFrame {
     private JLabel ConcreteProducts;
 
     public FactoryView(String path) throws HeadlessException {
+        setTitle("Factory ");
         setLocationRelativeTo(null);
         okButton.addActionListener(e->{
             try {

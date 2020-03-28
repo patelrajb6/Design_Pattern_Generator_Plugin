@@ -18,6 +18,7 @@ public class FacadeView extends JFrame {
     private JPanel rootPanel;
 
     public FacadeView(String path) throws HeadlessException {
+        setTitle("Facade");
         setLocationRelativeTo(null);
         okButton.addActionListener(e->{
             try {

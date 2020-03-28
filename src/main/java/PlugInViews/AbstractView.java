@@ -19,7 +19,7 @@ public class AbstractView extends JFrame {
     private JLabel ConcreteFactories;
     private AbstractConfig UserGenerated;
     public AbstractView(String path){
-        ArrayList<String> inputs= new ArrayList<String>();
+        setTitle("Abstract Factory");
         setLocationRelativeTo(null);
         //UserGenerated=new AbstractConfig();
         okButton.addActionListener(e->{

@@ -25,6 +25,7 @@ public class MediatorView extends JFrame {
     private JLabel AbstractUser;
 
     public MediatorView(String path) throws HeadlessException {
+        setTitle("Mediator");
         setLocationRelativeTo(null);
         okButton.addActionListener(e->{
             try {
