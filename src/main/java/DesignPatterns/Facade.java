@@ -14,6 +14,7 @@ public class Facade extends DesignFactory {
     private List<String> concreteFacade;    //list of all the concrete classes implementing the Abstract Class
     private Set<Map.Entry<String, ConfigValue>> Classes;        //storing the class and its object into set
     Facade(Config con) {
+        super();
         if(con!=null)
             this.conf=con;
         else

@@ -10,6 +10,7 @@ public class Template extends DesignFactory {
     private String AbstractClass,TemplateMethod;
     private List<String>AbstractMethods,ConcreteClasses;
     Template(Config con ) {    //constructor
+        super();
         try {
             if(con!=null)
                 this.conf=con;

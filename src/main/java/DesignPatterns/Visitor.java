@@ -11,6 +11,7 @@ public class Visitor extends DesignFactory{
     private String parameter;
     Visitor(Config con)
     {
+        super();
         try{
             if(con!=null)
                 this.conf=con;

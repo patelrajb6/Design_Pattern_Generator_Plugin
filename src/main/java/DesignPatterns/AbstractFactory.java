@@ -16,6 +16,7 @@ public class AbstractFactory extends DesignFactory {
     private List<String> ConcreteFactories; //Concrete factories
 
     AbstractFactory(Config con){
+        super();
         if(con!=null)
             this.conf=con;
         else

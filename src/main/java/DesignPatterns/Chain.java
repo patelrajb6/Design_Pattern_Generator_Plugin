@@ -14,6 +14,7 @@ public class Chain extends DesignFactory {
     private String instance;
     Chain(Config con)
     {
+        super();
         try{
             if(con!=null)
                 this.conf=con;

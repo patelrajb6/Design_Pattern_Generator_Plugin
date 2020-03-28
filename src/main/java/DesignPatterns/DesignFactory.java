@@ -1,10 +1,13 @@
 package DesignPatterns;
 
+import NameClashDetection.PotentialClashDialog;
 import PlugInViews.NameClassErrorDialog;
-import NameClashDetection.clashDetector;
+import NameClashDetection.ClashDetector;
 import PlugInViews.ConfirmationDialog;
 import PlugInViews.DesignPanel;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
+import com.intellij.psi.PsiFile;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
@@ -17,11 +20,22 @@ import java.util.List;
 public abstract class DesignFactory {
     Logger logger=LoggerFactory.getLogger(getClass());
     Config conf;
-    List<String>duplicateFiles= new ArrayList<>();
-    List<String>generatedFiles= new ArrayList<>();
+    List<String>duplicateFiles;
+    List<String>generatedFiles;
+    List<PsiFile>clashFiles;
     String dirPath;
     String absolutePath;
-    Project currentProject= DesignPanel.currentProject;
+    ClashDetector detector;
+
+    Project currentProject;
+    protected DesignFactory(){
+        duplicateFiles= new ArrayList<>();
+        generatedFiles= new ArrayList<>();
+        clashFiles=new ArrayList<>();
+        currentProject= DesignPanel.currentProject;
+        detector= new ClashDetector(currentProject);
+
+    }
     abstract  void createClass(String name,String path)throws IOException;
     abstract public void GenerateCode(String path)throws IOException;
     void generateFile (String syntax, String fileName, String path) {
@@ -46,6 +60,11 @@ public abstract class DesignFactory {
         try{
             if (file.createNewFile()) {
                 generatedFiles.add(absolutePath);
+                Pair<Boolean,PsiFile>result=detector.ClashChecker(file.getName());
+                if(result.first){
+                    clashFiles.add(result.second);
+                }
+
                 writetoFile(file, syntax);
                 logger.info("File is created!");
             } else {
@@ -85,10 +104,13 @@ public abstract class DesignFactory {
     }
 
     public void CheckRepeatedFiles(){
-        clashDetector detector= new clashDetector(currentProject);
-        detector.getPsifiles();
 
-        if(duplicateFiles.size()==0){
+        if( clashFiles.size()!=0){
+            new PotentialClashDialog(clashFiles);
+            clashFiles.clear();
+        }
+        else if(duplicateFiles.size()==0){
+
             new ConfirmationDialog();
         }
         else{

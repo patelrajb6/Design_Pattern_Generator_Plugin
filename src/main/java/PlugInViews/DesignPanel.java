@@ -1,27 +1,13 @@
 package PlugInViews;
 
-import DesignPatterns.DesignPattern;
-import NameClashDetection.clashDetector;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 public class DesignPanel extends JFrame {
     Logger logger = LoggerFactory.getLogger(getClass());

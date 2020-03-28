@@ -11,7 +11,9 @@ public class Builder extends DesignFactory {
     private String Object;                      //DesignPatterns.Builder Pattern needs Object to be structurally modified so it is that object
 
     public Builder(Config con) {           //Constructor
+        super();
         try{
+
             if(con!=null)
                 this.conf=con;
             else

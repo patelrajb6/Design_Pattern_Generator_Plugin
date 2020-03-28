@@ -17,6 +17,7 @@ public class Mediator extends DesignFactory {
     private String AbstractMethod;
     private String MediatorObject;
     Mediator(Config con) {    //constructor
+        super();
         try{
             if(con!=null)
                 this.conf=con;

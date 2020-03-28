@@ -13,6 +13,7 @@ public class Factory extends DesignFactory {
 
     public Factory(Config con)
     {
+        super();
         if(con!=null)
             this.conf=con;
         else
