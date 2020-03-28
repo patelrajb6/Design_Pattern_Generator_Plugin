@@ -22,7 +22,7 @@ public abstract class DesignFactory {
     Config conf;
     List<String>duplicateFiles;
     List<String>generatedFiles;
-    List<PsiFile>clashFiles;
+    List<Pair<PsiFile,File>>clashFiles;
     String dirPath;
     String absolutePath;
     ClashDetector detector;
@@ -62,7 +62,7 @@ public abstract class DesignFactory {
                 generatedFiles.add(absolutePath);
                 Pair<Boolean,PsiFile>result=detector.ClashChecker(file.getName());
                 if(result.first){
-                    clashFiles.add(result.second);
+                    clashFiles.add(new Pair<PsiFile, File>(result.second,file));
                 }
 
                 writetoFile(file, syntax);
@@ -104,17 +104,18 @@ public abstract class DesignFactory {
     }
 
     public void CheckRepeatedFiles(){
-
+        File fileLocater;
         if( clashFiles.size()!=0){
+
             new PotentialClashDialog(clashFiles);
-            clashFiles.clear();
+          //  clashFiles.clear();
         }
         else if(duplicateFiles.size()==0){
 
             new ConfirmationDialog();
         }
         else{
-            File fileLocater;
+
             new NameClassErrorDialog(duplicateFiles);
             for (String file: generatedFiles){
                 fileLocater= new File(file);

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="NameClashDetection.PotentialClashDialog">
-  <grid id="27dc6" binding="rootpanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="rootpanel" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="241"/>
+      <xy x="20" y="20" width="642" height="241"/>
     </constraints>
     <properties/>
-    <border type="none"/>
+    <border type="empty">
+      <font/>
+      <size top="5" left="5" bottom="5" right="5"/>
+    </border>
     <children>
       <component id="b3eaf" class="javax.swing.JLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Warrning!! Potential clashes for files below and the location of file."/>
+          <text value="Warrning!! Potential clash possible with the following files and the files in modules of this project."/>
         </properties>
       </component>
       <component id="c35c5" class="javax.swing.JList" binding="list1" default-binding="true">
@@ -50,10 +53,36 @@
       </component>
       <component id="1bc" class="javax.swing.JButton" binding="OKButton" default-binding="true">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="OK"/>
+        </properties>
+      </component>
+      <component id="ca237" class="javax.swing.JLabel" binding="oklabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Courier" style="1"/>
+          <text value="Press OK to still generate files."/>
+        </properties>
+      </component>
+      <component id="72e31" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Courier" style="1"/>
+          <text value="Press Cancel to not generate files."/>
+        </properties>
+      </component>
+      <component id="10556" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cancel"/>
         </properties>
       </component>
     </children>
