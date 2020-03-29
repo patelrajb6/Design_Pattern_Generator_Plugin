@@ -4,14 +4,12 @@
 ## Whats new:
 This version of the Design Pattern Generator includes:  
 
-1. Duplicate file checking for the folder the files are created in. 
-2. Possible name clash checking for the files being created.
-     
-     The files being generated are checked if there exist a file with same name <br> in any of the source roots of the project and the filetype is java.
-     Using projectRootManager to get the sourceroots and recursively getting all virtual files<br>
+* Duplicate file checking for the folder the files are created in. 
+* Possible name clash checking for the files being created.
+    * The files being generated are checked if there exist a file with same name <br> in any of the source roots of the project and the filetype is java.
+    * Using projectRootManager to get the sourceroots and recursively getting all virtual files<br>
      and then processing those virtual files to get psifiles. Using PsiFile getting the java files.
-     
-     Method ClashChecker checks the file if it clashes or not. It also returns the PsiFile for which it clashes.<br>
+    * Method ClashChecker checks the file if it clashes or not. It also returns the PsiFile for which it clashes.<br>
      This is then displayed to the user as potential clash. This way the user knows what to do with it.
      
   
