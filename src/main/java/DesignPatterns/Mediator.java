@@ -57,10 +57,10 @@ public class Mediator extends DesignFactory {
                 {
                     syntax+=String.format("\tprivate %s %s;\n", instances.getKey(),instances.getValue().unwrapped());
                 }
-                syntax+=String.format("\tpublic %s() {\n", className);
+                syntax+=String.format("\tpublic %s(%s %s) {\n", className,AbstractMediator,MediatorObject);
                 for(Map.Entry<String,ConfigValue> instances: ConcreteUsers)
                 {
-                    syntax+=String.format("\t\tthis.%s= new %s();\n",instances.getValue().unwrapped() ,instances.getKey());
+                    syntax+=String.format("\t\tthis.%s= new %s(%s);\n",instances.getValue().unwrapped() ,instances.getKey(),MediatorObject);
                 }
                 syntax+="\t}\n";
                 syntax+=String.format("\tpublic %s {\n\t}\n}",AbstractMethod);
