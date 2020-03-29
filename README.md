@@ -3,6 +3,7 @@
 ## Task: Build Plugin for the IntelliJ with Name clash detection
 ## Whats new:
 This version of the Design Pattern Generator includes:  
+<html>
 <ul>
   <li>Duplicate file checking for the folder the files are created in. </li>
   <li>Possible name clash checking for the files being created.
@@ -19,7 +20,7 @@ This version of the Design Pattern Generator includes:
      </ul>
     </li>
 </ul>
-        
+</html>   
              
        
 ### Input:  
